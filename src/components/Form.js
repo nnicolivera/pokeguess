@@ -17,6 +17,7 @@ export const Form = ({ titleRef }) => {
 
     useEffect(() => {
         inputRef.current.focus();
+        setValue("");
     }, [flag]);
 
     const reset = () => {

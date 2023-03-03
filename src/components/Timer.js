@@ -18,7 +18,6 @@ export const Timer = ({ titleRef }) => {
                     dispatch(setTime(10));
                     dispatch(setFlag(false));
                     dispatch(randomId(newId));
-                    //limpiar input value
                     dispatch(decrementLifes(lifes));
                     titleRef.current.style = "color: black";
                 }
