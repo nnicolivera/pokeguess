@@ -1,11 +1,14 @@
-import React from 'react';
-import life from '../../src/life.png';
+import life from "../../src/life.png";
+import { useSelector } from "react-redux";
 
-export const Lifes = ({ lifes }) => {
+export const Lifes = () => {
+    const lifes = useSelector((state) => state.lifes);
+
     return (
         <>
-            {lifes.map(n => (<img key={n} src={life} alt="pokemon" width="20px" />))}
-            <hr />
+            {lifes.map((n) => (
+                <img key={n} src={life} alt="pokemon" width="20px" />
+            ))}
         </>
-    )
-}
+    );
+};

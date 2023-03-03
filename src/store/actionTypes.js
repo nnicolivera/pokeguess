@@ -1,0 +1,6 @@
+export const SET_DATA = "SET_DATA";
+export const SET_LIFES = "SET_LIFES";
+export const INCREMENT_LIFES = "INCREMENT_LIFES";
+export const DECREMENT_LIFES = "DECREMENT_LIFES";
+export const RESET_SCORE = "RESET_SCORE";
+export const INCREMENT_SCORE = "INCREMENT_SCORE";

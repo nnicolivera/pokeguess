@@ -1,44 +1,59 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
+import { useCompare } from "../hooks/useCompare";
+import { useSelector } from "react-redux";
 
-export const Form = ({ name, lifes, setLifes, nextPokemon, titleRef }) => {
+export const Form = ({ nextPokemon, titleRef, setTime, flag, setFlag }) => {
     const [value, setValue] = useState("");
     const inputRef = useRef(null);
+    const { assert, fail } = useCompare();
+    const name = useSelector((state) => state.data.name);
+    const score = useSelector((state) => state.score);
+    const lifes = useSelector((state) => state.lifes);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [flag]);
+
+    const reset = () => {
+        setTime(10);
+        setFlag(false);
+        setValue("");
+        nextPokemon();
+    };
 
     const compare = (e) => {
         e.preventDefault();
         if (!value) {
             alert("Must write something!");
-        } else {
-            if (name === value.toLowerCase()) {
-                titleRef.current.style = "color: green";
-                alert("Perfect!");
-                setValue("");
-                const copy = [...lifes];
-                copy.push(lifes.length + 1);
-                setLifes(copy);
-                nextPokemon();
-            } else if (lifes.length > 0) {
-                titleRef.current.style = "color: red";
-                inputRef.current.focus();
-                const copy = [...lifes];
-                copy.pop();
-                setLifes(copy);
-                console.log(`Wrong! ${lifes.length - 1} lifes remaining...`)
-            } else {
-                alert("You failed...");
-            }
+        } else if (name === value.toLowerCase()) {
+            assert(titleRef);
+            reset();
+        } else if (lifes.length > 0) {
+            fail(titleRef);
+            reset();
         }
-    }
+    };
 
     const handleChange = (e) => {
         setValue(e.target.value);
         titleRef.current.style = "color: black";
-    }
+    };
 
     return (
-        <form onSubmit={(e) => compare(e)}>
-            <input type="text" value={value} onChange={handleChange} ref={inputRef} />
-            <button type='submit'>Comparar</button>
-        </form>
-    )
-}
+        <>
+            <form onSubmit={(e) => compare(e)}>
+                <input
+                    type="text"
+                    value={value}
+                    onChange={handleChange}
+                    ref={inputRef}
+                    disabled={!flag}
+                />
+                <button type="submit" disabled={!flag}>
+                    Compare
+                </button>
+            </form>
+            <h3>Your score is: {score}</h3>
+        </>
+    );
+};
