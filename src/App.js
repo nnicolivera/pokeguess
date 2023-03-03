@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Pokemon } from "./components/Pokemon";
 import { Form } from "./components/Form";
 import { Lifes } from "./components/Lifes";
@@ -9,11 +9,9 @@ import { setData } from "./store/actions";
 
 function App() {
   const dispatch = useDispatch();
-  const [id, setId] = useState(Math.floor(Math.random() * 100) + 1);
-  const [time, setTime] = useState(10);
-  const [flag, setFlag] = useState(false);
   const titleRef = useRef(null);
 
+  const id = useSelector((state) => state.id);
   const lifes = useSelector((state) => state.lifes);
   const score = useSelector((state) => state.score);
 
@@ -31,11 +29,6 @@ function App() {
     fetchData(id);
   }, [id]);
 
-  const randomId = () => {
-    const newId = Math.floor(Math.random() * 100) + 1;
-    setId(newId);
-  };
-
   return (
     <div className="App">
       <h1>POKEGUESS</h1>
@@ -43,22 +36,13 @@ function App() {
       {lifes.length > 0 ? (
         <>
           <Timer
-            randomId={randomId}
             titleRef={titleRef}
-            time={time}
-            setTime={setTime}
-            flag={flag}
-            setFlag={setFlag}
           />
           <Lifes />
           <h3 ref={titleRef}>Who is this pokemon?</h3>
-          <Pokemon setFlag={setFlag} />
+          <Pokemon />
           <Form
-            nextPokemon={randomId}
             titleRef={titleRef}
-            setTime={setTime}
-            setFlag={setFlag}
-            flag={flag}
           />
           <br />
         </>

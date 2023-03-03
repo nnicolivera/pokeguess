@@ -1,6 +1,9 @@
 export const SET_DATA = "SET_DATA";
+export const RANDOM_ID = "RANDOM_ID";
 export const SET_LIFES = "SET_LIFES";
 export const INCREMENT_LIFES = "INCREMENT_LIFES";
 export const DECREMENT_LIFES = "DECREMENT_LIFES";
 export const RESET_SCORE = "RESET_SCORE";
 export const INCREMENT_SCORE = "INCREMENT_SCORE";
+export const SET_TIME = "SET_TIME";
+export const SET_FLAG = "SET_FLAG";

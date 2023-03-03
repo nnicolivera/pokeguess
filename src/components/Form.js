@@ -1,24 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useCompare } from "../hooks/useCompare";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setTime, setFlag, randomId } from "../store/actions";
 
-export const Form = ({ nextPokemon, titleRef, setTime, flag, setFlag }) => {
+export const Form = ({ titleRef }) => {
+    const dispatch = useDispatch();
     const [value, setValue] = useState("");
     const inputRef = useRef(null);
-    const { assert, fail } = useCompare();
+    const { guess, fail } = useCompare();
+
     const name = useSelector((state) => state.data.name);
     const score = useSelector((state) => state.score);
     const lifes = useSelector((state) => state.lifes);
+    const flag = useSelector((state) => state.flag);
+    const newId = Math.floor(Math.random() * 100) + 1;
 
     useEffect(() => {
         inputRef.current.focus();
     }, [flag]);
 
     const reset = () => {
-        setTime(10);
-        setFlag(false);
+        dispatch(setTime(10));
+        dispatch(setFlag(false));
         setValue("");
-        nextPokemon();
+        dispatch(randomId(newId));
     };
 
     const compare = (e) => {
@@ -26,7 +31,7 @@ export const Form = ({ nextPokemon, titleRef, setTime, flag, setFlag }) => {
         if (!value) {
             alert("Must write something!");
         } else if (name === value.toLowerCase()) {
-            assert(titleRef);
+            guess(titleRef);
             reset();
         } else if (lifes.length > 0) {
             fail(titleRef);
