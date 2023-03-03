@@ -5,6 +5,11 @@ export const setData = (data) => ({
     payload: data,
 });
 
+export const randomId = (id) => ({
+    type: actions.RANDOM_ID,
+    payload: id,
+})
+
 export const setLifes = (lifes) => ({
     type: actions.SET_LIFES,
     payload: lifes,
@@ -24,4 +29,14 @@ export const resetScore = () => ({
 
 export const incrementScore = () => ({
     type: actions.INCREMENT_SCORE,
+});
+
+export const setTime = (time) => ({
+    type: actions.SET_TIME,
+    payload: time,
+});
+
+export const setFlag = (boolean) => ({
+    type: actions.SET_FLAG,
+    payload: boolean,
 });

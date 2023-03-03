@@ -10,7 +10,7 @@ export const useCompare = () => {
 
     const lifes = useSelector((state) => state.lifes);
 
-    const assert = (titleRef) => {
+    const guess = (titleRef) => {
         if (lifes.length === 1) {
             dispatch(incrementLifes());
         }
@@ -24,5 +24,5 @@ export const useCompare = () => {
         console.log(`Wrong! ${lifes.length - 1} lifes remaining...`);
     };
 
-    return { assert, fail };
+    return { guess, fail };
 };
