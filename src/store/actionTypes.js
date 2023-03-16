@@ -5,5 +5,7 @@ export const INCREMENT_LIFES = "INCREMENT_LIFES";
 export const DECREMENT_LIFES = "DECREMENT_LIFES";
 export const RESET_SCORE = "RESET_SCORE";
 export const INCREMENT_SCORE = "INCREMENT_SCORE";
+export const SET_RANKING = "SET_RANKING";
 export const SET_TIME = "SET_TIME";
 export const SET_FLAG = "SET_FLAG";
+export const ADD_USERNAME = "ADD_USERNAME";

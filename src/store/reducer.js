@@ -3,13 +3,25 @@ const data = [];
 const id = Math.floor(Math.random() * 100) + 1;
 const lifes = [0, 1, 2, 3, 4];
 const score = 0;
+const ranking = [];
 const time = 10;
 const flag = false;
+const usernames = [];
 
 export const reducer = (
-    state = { data: data, id: id, lifes: lifes, score: score, time: time, flag: flag }, action) => {
+    state = {
+        data: data,
+        id: id,
+        lifes: lifes,
+        score: score,
+        ranking: ranking,
+        time: time,
+        flag: flag,
+        usernames: usernames
+    },
+    action
+) => {
     switch (action.type) {
-
         case actions.SET_DATA:
             return {
                 ...state,
@@ -20,7 +32,7 @@ export const reducer = (
             return {
                 ...state,
                 id: action.payload,
-            }
+            };
 
         case actions.SET_LIFES:
             return {
@@ -53,16 +65,28 @@ export const reducer = (
                 score: state.score + 1,
             };
 
+        case actions.SET_RANKING:
+            return {
+                ...state,
+                ranking: state.ranking.concat(action.payload),
+            };
+
         case actions.SET_TIME:
             return {
                 ...state,
                 time: action.payload,
-            }
+            };
 
         case actions.SET_FLAG:
             return {
                 ...state,
                 flag: action.payload,
+            };
+
+        case actions.ADD_USERNAME:
+            return {
+                ...state,
+                usernames: state.usernames.concat(action.payload),
             }
 
         default:

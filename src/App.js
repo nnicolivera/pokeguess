@@ -6,14 +6,13 @@ import { Lifes } from "./components/Lifes";
 import { Timer } from "./components/Timer";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "./store/actions";
+import { EndGame } from "./components/EndGame";
 
-function App() {
+export const App = () => {
   const dispatch = useDispatch();
   const titleRef = useRef(null);
-
   const id = useSelector((state) => state.id);
   const lifes = useSelector((state) => state.lifes);
-  const score = useSelector((state) => state.score);
 
   useEffect(() => {
     const fetchData = async (id) => {
@@ -35,27 +34,16 @@ function App() {
       <hr />
       {lifes.length > 0 ? (
         <>
-          <Timer
-            titleRef={titleRef}
-          />
+          <Timer titleRef={titleRef} />
           <Lifes />
           <h3 ref={titleRef}>Who is this pokemon?</h3>
           <Pokemon />
-          <Form
-            titleRef={titleRef}
-          />
+          <Form titleRef={titleRef} />
           <br />
         </>
       ) : (
-        <>
-          <h2>Your final score is: {score}</h2>
-          <button onClick={() => window.location.reload(false)}>
-            Click to reload!
-          </button>
-        </>
+        <EndGame />
       )}
     </div>
   );
 }
-
-export default App;
